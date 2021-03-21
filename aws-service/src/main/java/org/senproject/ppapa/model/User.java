@@ -1,6 +1,6 @@
 package org.senproject.ppapa.model;
 
-public class User {
+public class User extends JsonModel {
 	private String userId;
 	private String password;
 	private ROLE role;
