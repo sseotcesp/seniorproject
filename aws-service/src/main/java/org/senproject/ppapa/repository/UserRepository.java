@@ -7,6 +7,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.PrimaryKey;
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.spec.PutItemSpec;
 import com.amazonaws.services.dynamodbv2.model.ConditionalCheckFailedException;
@@ -23,6 +24,7 @@ public class UserRepository {
 
 	public PutItemOutcome save(User user) throws ConditionalCheckFailedException {
 		Item item = new Item();
+		PrimaryKey key = new PrimaryKey();
 		item.withString("userId", user.getUserId());
 		item.withString("password", user.getPassword());
 		item.withString("role", user.getRole().name());
