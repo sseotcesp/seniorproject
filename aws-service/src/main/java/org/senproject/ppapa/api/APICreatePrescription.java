@@ -10,28 +10,32 @@ import java.io.OutputStreamWriter;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.senproject.ppapa.model.User;
-import org.senproject.ppapa.repository.UserRepository;
+import org.senproject.ppapa.model.Prescription;
+import org.senproject.ppapa.repository.PrescriptionRepository;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 
-public class APICreateUser implements RequestStreamHandler {
-
-	public void handleRequest(InputStream input, OutputStream output, Context context) throws IOException {
+public class APICreatePrescription implements RequestStreamHandler {
 	
+	public void handleRequest(InputStream input, OutputStream output, Context context) throws IOException {
+		
 	    JSONParser parser = new JSONParser();
 	    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 	    JSONObject responseJson = new JSONObject();
 	    try {
 	    	JSONObject responseBody = new JSONObject();
 	        JSONObject event = (JSONObject) parser.parse(reader);
-	        context.getLogger().log("APICreateUser invoked " + event);
+	        context.getLogger().log("APICreatePrescription invoked " + event);
 	        if (event.get("body") != null) {
-	        	User user = User.newInstance(User.class, (String) event.get("body"));
-	        	UserRepository repository = new UserRepository();	        	
-	        	repository.save(user);
-	        	responseBody.put("message", "New User created " + user.getUserId());
+	        	Prescription prescription = Prescription.newInstance(Prescription.class, (String) event.get("body"));
+	        	PrescriptionRepository repository = new PrescriptionRepository();
+	        	if(repository.userExists(prescription)) {
+	        		repository.save(prescription);
+	        		responseBody.put("message", "New Prescription created " + prescription.getKey());
+	        	}
+	        	else
+	        		responseBody.put("message", "no existo");
 	        }
 
 
