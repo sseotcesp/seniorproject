@@ -31,7 +31,7 @@ public class PrescriptionRepository {
 		PrimaryKey key = new PrimaryKey();
 	 
 		item.withString("key", prescription.getKey());
-		item.withString("puser", prescription.getpUser());
+		item.withString("puser", prescription.getPuser());
 		item.withString("information", prescription.getInformation());
 		return this.dynamoDb.getTable(DYNAMODB_TABLE_NAME).putItem(new PutItemSpec().withItem(item));
 		
@@ -41,15 +41,18 @@ public class PrescriptionRepository {
 		AmazonDynamoDBClient client = new AmazonDynamoDBClient();
 		client.setRegion(Region.getRegion(REGION));
 		DynamoDB dynamoDB1 = new DynamoDB(client); 
-		Table table = dynamoDB1.getTable("Users"); 
-		GetItemSpec spec = new GetItemSpec().withPrimaryKey("userId", prescription.getpUser());
-		Item dummy = table.getItem(spec); 
-		if(dummy!= null)
+		Table table = dynamoDB1.getTable("User"); 
+		GetItemSpec spec = new GetItemSpec().withPrimaryKey("userId", prescription.getPuser());
+		Item dummy = table.getItem("userId", prescription.getPuser()); 
+		//Item dummy = table.getItem(spec);
+	//	spec.withProjectionExpression("role");
+		if(dummy != null && dummy.getString("role").equals("PHARMACIST"))//table.getItem(spec).toString() != "PHARMACIST")
 			return true; 
 		else 
 			return false;
 	}
 		
+	
 	/*
 	public User findByUserId(String userId) {
 		dynamoDb.getTable(DYNAMODB_TABLE_NAME).get

@@ -17,43 +17,44 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 
 public class APICreatePrescription implements RequestStreamHandler {
-	
+
 	public void handleRequest(InputStream input, OutputStream output, Context context) throws IOException {
-		
-	    JSONParser parser = new JSONParser();
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-	    JSONObject responseJson = new JSONObject();
-	    try {
-	    	JSONObject responseBody = new JSONObject();
-	        JSONObject event = (JSONObject) parser.parse(reader);
-	        context.getLogger().log("APICreatePrescription invoked " + event);
-	        if (event.get("body") != null) {
-	        	Prescription prescription = Prescription.newInstance(Prescription.class, (String) event.get("body"));
-	        	PrescriptionRepository repository = new PrescriptionRepository();
-	        	if(repository.userExists(prescription)) {
-	        		repository.save(prescription);
-	        		responseBody.put("message", "New Prescription created " + prescription.getKey());
-	        	}
-	        	else
-	        		responseBody.put("message", "no existo");
-	        }
 
+		JSONParser parser = new JSONParser();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+		JSONObject responseJson = new JSONObject();
+		try {
+			JSONObject responseBody = new JSONObject();
+			JSONObject event = (JSONObject) parser.parse(reader);
+			context.getLogger().log("APICreatePrescription invoked " + event);
 
-	        JSONObject headerJson = new JSONObject();
-	        headerJson.put("x-custom-header", "my custom header value");
+			if (event.get("body") != null) {
 
-	        responseJson.put("statusCode", 200);
-	        responseJson.put("headers", headerJson);
-	        responseJson.put("body", responseBody.toString());
+				Prescription prescription = Prescription.newInstance(Prescription.class, (String) event.get("body"));
+				PrescriptionRepository repository = new PrescriptionRepository();
+				if (repository.userExists(prescription)) {
+					repository.save(prescription);
+					responseBody.put("message", "New Prescription created " + prescription.getKey());
+				} else {
+					responseBody.put("message", "no existo");
+				}
+			}
 
-	    } catch (ParseException pex) {
-	        responseJson.put("statusCode", 400);
-	        responseJson.put("exception", pex);
-	    }
+			JSONObject headerJson = new JSONObject();
+			headerJson.put("x-custom-header", "my custom header value");
 
-	    OutputStreamWriter writer = new OutputStreamWriter(output, "UTF-8");
-	    writer.write(responseJson.toString());
-	    writer.close();
+			responseJson.put("statusCode", 200);
+			responseJson.put("headers", headerJson);
+			responseJson.put("body", responseBody.toString());
+
+		} catch (ParseException pex) {
+			responseJson.put("statusCode", 400);
+			responseJson.put("exception", pex);
+		}
+
+		OutputStreamWriter writer = new OutputStreamWriter(output, "UTF-8");
+		writer.write(responseJson.toString());
+		writer.close();
 	}
 
 	public void handleGetByParam(InputStream inputStream, OutputStream outputStream, Context context)
@@ -61,9 +62,8 @@ public class APICreatePrescription implements RequestStreamHandler {
 
 		// implementation
 	}
-	
-	public void handleLogin(InputStream inputStream, OutputStream outputStream, Context context)
-			throws IOException {
-		
+
+	public void handleLogin(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
+
 	}
 }

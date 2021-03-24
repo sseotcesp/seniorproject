@@ -4,14 +4,14 @@ import java.util.UUID;
 
 public class Prescription extends JsonModel {
 
-	private String key; 
+	private String key;
 	private String information;
-	private String pUser; 
-	/*
-	public Prescription(){
-		this.setKey(UUID.randomUUID().toString()); 
+	private String puser;
+
+	public Prescription() {
+		this.setKey(UUID.randomUUID().toString());
 	}
-*/
+
 	public String getKey() {
 		return key;
 	}
@@ -28,12 +28,12 @@ public class Prescription extends JsonModel {
 		this.information = information;
 	}
 
-	public String getpUser() {
-		return pUser;
+	public String getPuser() {
+		return puser;
 	}
 
-	public void setpUser(String pUser) {
-		this.pUser = pUser;
+	public void setPuser(String puser) {
+		this.puser = puser;
 	}
+
 }
-	
