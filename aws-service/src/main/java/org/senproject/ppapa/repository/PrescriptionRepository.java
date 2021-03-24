@@ -20,7 +20,7 @@ public class PrescriptionRepository {
 
 	private DynamoDB dynamoDb;
 	private String DYNAMODB_TABLE_NAME = "Prescription";
-	private Regions REGION = Regions.US_EAST_1;
+	public static Regions REGION = Regions.US_EAST_1;
 
 	public PrescriptionRepository() {
 		initDynamoDbClient();
@@ -42,7 +42,7 @@ public class PrescriptionRepository {
 		client.setRegion(Region.getRegion(REGION));
 		DynamoDB dynamoDB1 = new DynamoDB(client); 
 		Table table = dynamoDB1.getTable("User"); 
-		GetItemSpec spec = new GetItemSpec().withPrimaryKey("userId", prescription.getPuser());
+		//GetItemSpec spec = new GetItemSpec().withPrimaryKey("userId", prescription.getPuser());
 		Item dummy = table.getItem("userId", prescription.getPuser()); 
 		//Item dummy = table.getItem(spec);
 	//	spec.withProjectionExpression("role");

@@ -4,3 +4,6 @@
 {
  "body":"{\"key\": \"asdfasd\", \"puser\":\"gar\",\"information\":\"asdfasdf\" }"
 }
+{
+ "body":"{\"user\": \"gar\", \"pass\":\"sdfsd\" }"
+}
