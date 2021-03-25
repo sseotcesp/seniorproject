@@ -10,7 +10,9 @@ import java.io.OutputStreamWriter;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.senproject.ppapa.model.Login;
+import org.senproject.ppapa.dto.Login;
+import org.senproject.ppapa.dto.Response;
+import org.senproject.ppapa.repository.UserRepository;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
@@ -22,16 +24,24 @@ public class LoginCheck implements RequestStreamHandler {
 		JSONParser parser = new JSONParser();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 		JSONObject responseJson = new JSONObject();
+		Response response = new Response();
 		try {
 			JSONObject responseBody = new JSONObject();
 			JSONObject event = (JSONObject) parser.parse(reader);
 			context.getLogger().log("LoginCheck invoked " + event);
 			if (event.get("body") != null) {
 				Login login = Login.newInstance(Login.class, (String) event.get("body"));
-				if (login.check()) {
-					responseBody.put("message", "Login Successful");
-				} else
-					responseBody.put("message", "You suck.");
+				UserRepository repository = new UserRepository();
+				 
+				if (repository.check(login.getUser(), login.getPass())) {
+					response.setMessage("Success");
+					response.setError("No Error");
+					response.setStatus(1);
+				} else {
+					response.setMessage("Failure");
+					response.setError("No Error");
+					response.setStatus(0);
+				}
 
 			}
 
@@ -40,11 +50,13 @@ public class LoginCheck implements RequestStreamHandler {
 
 			responseJson.put("statusCode", 200);
 			responseJson.put("headers", headerJson);
-			responseJson.put("body", responseBody.toString());
+			responseJson.put("body", response.toString());
 
 		} catch (ParseException pex) {
 			responseJson.put("statusCode", 400);
 			responseJson.put("exception", pex);
+		} catch (Exception e) {
+			
 		}
 
 		OutputStreamWriter writer = new OutputStreamWriter(output, "UTF-8");

@@ -2,7 +2,7 @@
   "body": "{\n        \"userId\":\"gar\",\n        \"password\":\"sdfsd\",\n        \"role\":\"PATIENT\"\n    }"
 }
 {
- "body":"{\"key\": \"asdfasd\", \"puser\":\"gar\",\"information\":\"asdfasdf\" }"
+ "body":"{ \"puser\":\"gar\",\"information\":\"asdfasdf\" }"
 }
 {
  "body":"{\"user\": \"gar\", \"pass\":\"sdfsd\" }"

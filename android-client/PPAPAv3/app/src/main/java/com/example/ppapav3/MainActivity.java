@@ -1,6 +1,8 @@
 package com.example.ppapav3;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 toPharmacist();
             }
         });
-
+        RQueueSingleton.getInstance(getApplicationContext()).getRequestQueue().start();
     }
 
     private void toDoctor()
@@ -59,4 +61,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, pharmLogin.class);
         startActivity(intent);
     }
+
 }

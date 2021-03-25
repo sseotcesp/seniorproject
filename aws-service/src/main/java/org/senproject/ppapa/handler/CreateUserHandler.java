@@ -1,6 +1,6 @@
 package org.senproject.ppapa.handler;
 
-import org.senproject.ppapa.data.Response;
+import org.senproject.ppapa.dto.Response;
 import org.senproject.ppapa.model.User;
 import org.senproject.ppapa.repository.UserRepository;
 

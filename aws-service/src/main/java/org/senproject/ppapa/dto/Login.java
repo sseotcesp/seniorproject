@@ -1,13 +1,15 @@
-package org.senproject.ppapa.model;
+package org.senproject.ppapa.dto;
 
 import com.amazonaws.regions.Region;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
+
+import org.senproject.ppapa.model.JsonModel;
 import org.senproject.ppapa.repository.PrescriptionRepository;
 
-
+// TODO move to dto package
 public class Login extends JsonModel {
 
 	private String user;
@@ -28,7 +30,7 @@ public class Login extends JsonModel {
 	public void setUser(String user) {
 		this.user = user;
 	}
-	
+	/*
 	public boolean check() {
 		AmazonDynamoDBClient client = new AmazonDynamoDBClient();
 		client.setRegion(Region.getRegion(PrescriptionRepository.REGION));
@@ -40,4 +42,5 @@ public class Login extends JsonModel {
 		else 
 			return false;
 	}
+	*/
 }

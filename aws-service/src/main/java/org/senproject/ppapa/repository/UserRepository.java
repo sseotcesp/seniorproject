@@ -9,6 +9,7 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.PrimaryKey;
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
+import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.spec.PutItemSpec;
 import com.amazonaws.services.dynamodbv2.model.ConditionalCheckFailedException;
 
@@ -36,10 +37,20 @@ public class UserRepository {
 		return null;
 	}
 */
+	public boolean check(String u, String p) {
+	
+		Table table = dynamoDb.getTable(DYNAMODB_TABLE_NAME); 
+		Item dummy = table.getItem("userId", u); 
+		if(dummy != null && dummy.getString("password").equals(p))
+			return true; 
+		else 
+			return false;
+	}
 	private void initDynamoDbClient() {
 
 		AmazonDynamoDBClient client = new AmazonDynamoDBClient();
 		client.setRegion(Region.getRegion(REGION));
 		this.dynamoDb = new DynamoDB(client);
 	}
+	
 }
