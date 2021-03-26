@@ -68,7 +68,6 @@ public class pharmLogin extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 String phUser = Name.getText().toString();
                                 AppResponse response1 = AppResponse.newInstance(AppResponse.class,  response.toString());
-                                System.out.println("response = " + response.toString());
                                 if(response1.getStatus() == 1) {
                                     Intent intent = new Intent(pharmLogin.this, pharmMainPage.class);
                                     intent.putExtra("Username", phUser);

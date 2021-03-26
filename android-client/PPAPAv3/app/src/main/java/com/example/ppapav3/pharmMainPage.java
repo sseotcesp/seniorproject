@@ -8,11 +8,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.example.ppapav3.dto.AppResponse;
+import com.example.ppapav3.dto.PharmacistInfo;
+import com.example.ppapav3.model.JsonModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class pharmMainPage extends AppCompatActivity {
 
     private Button LogOut;
     private TextView Pharmer;
-
+    private static String url = "https://2ixsb9kljc.execute-api.us-east-1.amazonaws.com/GetPrescription/APIGetPrescription";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,12 +32,34 @@ public class pharmMainPage extends AppCompatActivity {
 
         Pharmer = (TextView)findViewById(R.id.tvPharm);
         LogOut = (Button)findViewById(R.id.btLO3);
-
-        Pharmer.setText("whatever you want to be here");
-
         Intent intent = getIntent();
         String str = intent.getStringExtra("Username");
 
+        JSONObject jsonObj;
+        try {
+            jsonObj = new JSONObject();
+            jsonObj.put("key", str);
+        } catch (JSONException e){
+            throw new RuntimeException(e);
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST, url, jsonObj, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        PharmacistInfo pharmacistInfo = PharmacistInfo.newInstance(PharmacistInfo.class,  response.toString());
+                    
+                        Pharmer.setText(pharmacistInfo.getInformation());
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+
+                    }
+                });
+        RQueueSingleton.getInstance(getApplicationContext()).getRequestQueue().add(jsonObjectRequest);
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
