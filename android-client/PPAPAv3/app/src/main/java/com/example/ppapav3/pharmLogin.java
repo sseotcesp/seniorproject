@@ -36,6 +36,7 @@ public class pharmLogin extends AppCompatActivity {
     private int counter = 5;
     boolean status;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +66,12 @@ public class pharmLogin extends AppCompatActivity {
 
                             @Override
                             public void onResponse(JSONObject response) {
+                                String phUser = Name.getText().toString();
                                 AppResponse response1 = AppResponse.newInstance(AppResponse.class,  response.toString());
                                 System.out.println("response = " + response.toString());
                                 if(response1.getStatus() == 1) {
                                     Intent intent = new Intent(pharmLogin.this, pharmMainPage.class);
+                                    intent.putExtra("Username", phUser);
                                     startActivity(intent);
                                 }
                                 else {

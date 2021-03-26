@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ppapav3">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PPAPAv3">
-        <activity android:name=".addPrescr"></activity>
+        <activity android:name=".createGood2"></activity>
+        <activity android:name=".createGood3" />
+        <activity android:name=".model.createGood2" />
+        <activity android:name=".createGood" />
+        <activity android:name=".addPrescr" />
         <activity android:name=".editPharm" />
         <activity android:name=".pharmMainPage" />
         <activity android:name=".patientReady" />
@@ -28,5 +34,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
