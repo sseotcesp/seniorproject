@@ -19,6 +19,9 @@ public class pharmMainPage extends AppCompatActivity {
 
         LogOut = (Button)findViewById(R.id.btLO3);
 
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("Username");
+
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

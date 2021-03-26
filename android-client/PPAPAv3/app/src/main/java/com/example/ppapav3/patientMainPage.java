@@ -21,6 +21,9 @@ public class patientMainPage extends AppCompatActivity {
         Ready = (Button)findViewById(R.id.btReady2);
         LogOut = (Button)findViewById(R.id.btLO2);
 
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("Username");
+
         Ready.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

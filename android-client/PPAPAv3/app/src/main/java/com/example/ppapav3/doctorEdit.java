@@ -65,7 +65,8 @@ public class doctorEdit extends AppCompatActivity {
 
                             @Override
                             public void onResponse(JSONObject response) {
-
+                                Intent intent = new Intent(doctorEdit.this, createGood2.class);
+                                startActivity(intent);
                             }
                         }, new Response.ErrorListener() {
 

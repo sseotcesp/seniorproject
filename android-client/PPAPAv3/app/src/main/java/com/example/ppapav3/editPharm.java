@@ -52,7 +52,8 @@ public class editPharm extends AppCompatActivity {
 
                             @Override
                             public void onResponse(JSONObject response) {
-
+                                Intent intent = new Intent(editPharm.this, createGood.class);
+                                startActivity(intent);
                             }
                         }, new Response.ErrorListener() {
 
@@ -72,5 +73,7 @@ public class editPharm extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 }

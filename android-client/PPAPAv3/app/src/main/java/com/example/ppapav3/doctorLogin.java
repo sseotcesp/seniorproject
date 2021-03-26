@@ -57,7 +57,9 @@ public class doctorLogin extends AppCompatActivity {
                                 AppResponse response1 = AppResponse.newInstance(AppResponse.class,  response.toString());
                                 System.out.println("response = " + response.toString());
                                 if(response1.getStatus() == 1) {
+                                    String dUser = Name.getText().toString();
                                     Intent intent = new Intent(doctorLogin.this, doctorMainPage.class);
+                                    intent.putExtra("Username", dUser);
                                     startActivity(intent);
                                 }
                                 else {

@@ -63,6 +63,10 @@ public class doctorMainPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("Username");
     }
 
 }
