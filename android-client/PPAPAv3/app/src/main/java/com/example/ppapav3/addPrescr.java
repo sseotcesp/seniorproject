@@ -12,6 +12,10 @@ import android.widget.TextView;
 public class addPrescr extends AppCompatActivity {
 
     private Button Back;
+    private EditText NewPharm;
+    private EditText Prescription;
+    private Button CreatePresc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +23,16 @@ public class addPrescr extends AppCompatActivity {
         setContentView(R.layout.activity_add_prescr2);
 
         Back = (Button)findViewById(R.id.btBack);
+        CreatePresc = (Button)findViewById(R.id.btCreatePres);
+        NewPharm = (EditText)findViewById(R.id.etPharmNewUser);
+        Prescription = (EditText)findViewById(R.id.etPrescInfo);
+
+        CreatePresc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
