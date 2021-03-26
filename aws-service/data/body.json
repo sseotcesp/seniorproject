@@ -7,3 +7,6 @@
 {
  "body":"{\"user\": \"gar\", \"pass\":\"sdfsd\" }"
 }
+{
+ "body":"{\"key\": \"gar\"}"
+}

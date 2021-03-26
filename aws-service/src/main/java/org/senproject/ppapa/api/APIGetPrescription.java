@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.senproject.ppapa.dto.PrescriptionKey;
 import org.senproject.ppapa.dto.Response;
 import org.senproject.ppapa.model.Prescription;
 import org.senproject.ppapa.repository.PrescriptionRepository;
@@ -33,19 +34,10 @@ public class APIGetPrescription implements RequestStreamHandler {
 
 			if (event.get("body") != null) {
 
-				Prescription prescription = Prescription.newInstance(Prescription.class, (String) event.get("body"));
-				PrescriptionRepository repository = new PrescriptionRepository();
-				if (repository.userExists(prescription)) {
-					repository.save(prescription);
-					response.setMessage("Success");
-					response.setError("No Error");
-					response.setStatus(1);
-				} else {
-					response.setMessage("Success");
-					response.setError("Error");
-					response.setStatus(0);
-
-				}
+				PrescriptionKey prescriptionKey = PrescriptionKey.newInstance(PrescriptionKey.class,
+						(String) event.get("body"));
+				PrescriptionRepository prescriptionRepository = new PrescriptionRepository();
+				responseBody.put("information", prescriptionRepository.getPrescription(prescriptionKey));
 			}
 
 			JSONObject headerJson = new JSONObject();

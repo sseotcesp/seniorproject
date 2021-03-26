@@ -1,5 +1,6 @@
 package org.senproject.ppapa.repository;
 
+import org.senproject.ppapa.dto.PrescriptionKey;
 import org.senproject.ppapa.model.Prescription;
 
 import com.amazonaws.regions.Region;
@@ -28,35 +29,39 @@ public class PrescriptionRepository {
 
 	public PutItemOutcome save(Prescription prescription) throws ConditionalCheckFailedException {
 		Item item = new Item();
-	 
+
 		item.withString("key", prescription.getKey());
 		item.withString("information", prescription.getInformation());
 		return this.dynamoDb.getTable(DYNAMODB_TABLE_NAME).putItem(new PutItemSpec().withItem(item));
-		
+
 	}
-	
+
 	public boolean userExists(Prescription prescription) {
 		AmazonDynamoDBClient client = new AmazonDynamoDBClient();
 		client.setRegion(Region.getRegion(REGION));
-		DynamoDB dynamoDB1 = new DynamoDB(client); 
-		Table table = dynamoDB1.getTable("User"); 
-		//GetItemSpec spec = new GetItemSpec().withPrimaryKey("userId", prescription.getPuser());
-		Item dummy = table.getItem("userId", prescription.getKey()); 
-		//Item dummy = table.getItem(spec);
-	//	spec.withProjectionExpression("role");
-		if(dummy != null && dummy.getString("role").equals("PHARMACIST"))//table.getItem(spec).toString() != "PHARMACIST")
-			return true; 
-		else 
+		DynamoDB dynamoDB1 = new DynamoDB(client);
+		Table table = dynamoDB1.getTable("User");
+		// GetItemSpec spec = new GetItemSpec().withPrimaryKey("userId",
+		// prescription.getPuser());
+		Item dummy = table.getItem("userId", prescription.getKey());
+		// Item dummy = table.getItem(spec);
+		// spec.withProjectionExpression("role");
+		if (dummy != null && dummy.getString("role").equals("PHARMACIST"))// table.getItem(spec).toString() !=
+																			// "PHARMACIST")
+			return true;
+		else
 			return false;
 	}
-		
-	
+
 	/*
-	public User findByUserId(String userId) {
-		dynamoDb.getTable(DYNAMODB_TABLE_NAME).get
-		return null;
+	 * public User findByUserId(String userId) {
+	 * dynamoDb.getTable(DYNAMODB_TABLE_NAME).get return null; }
+	 */public String getPrescription(PrescriptionKey prescriptionKey) {
+		Item dummy = this.dynamoDb.getTable(DYNAMODB_TABLE_NAME).getItem("key", prescriptionKey.getKey());
+		return dummy.getString("information");
+
 	}
-*/
+
 	private void initDynamoDbClient() {
 
 		AmazonDynamoDBClient client = new AmazonDynamoDBClient();
@@ -64,8 +69,4 @@ public class PrescriptionRepository {
 		this.dynamoDb = new DynamoDB(client);
 	}
 
-	
-	
 }
-
-	
