@@ -31,7 +31,7 @@ public class APICreateUser implements RequestStreamHandler {
 	        	User user = User.newInstance(User.class, (String) event.get("body"));
 	        	UserRepository repository = new UserRepository();	        	
 	        	repository.save(user);
-	        	responseBody.put("message", "New User created " + user.getUserId());
+	       // 	responseBody.put("message", "New User created " + user.getUserId());
 	        }
 
 

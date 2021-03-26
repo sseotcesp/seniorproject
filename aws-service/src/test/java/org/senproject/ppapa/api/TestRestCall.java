@@ -26,7 +26,7 @@ public class TestRestCall {
 //        headers.set("X-COM-LOCATION", "USA");
         String body = "{\"userId\":\"garsss\",\"password\":\"sdfsd\",\"role\":\"PATIENT\"}";
         Prescription prescription = new Prescription();
-        prescription.setPuser("gar");
+       // prescription.setPuser("gar");
         //prescription.setKey("sadfadsf);
         prescription.setInformation("gagag hjdfdfhihjiwfijijifw");
         System.out.println(prescription.toString());

@@ -8,13 +8,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class editPharm extends AppCompatActivity {
 
     private Button Back;
     private Button CreateP;
     private EditText PharmUser;
     private EditText PharmPass;
-
+    private static String url = "https://sx5bm5veyg.execute-api.us-east-1.amazonaws.com/test-user/APICreateUser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +36,33 @@ public class editPharm extends AppCompatActivity {
 
         CreateP.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
 
+            public void onClick(View v) {
+                JSONObject jsonObj;
+                try {
+                    jsonObj = new JSONObject();
+                    jsonObj.put("userId", PharmUser.getText().toString());
+                    jsonObj.put("password", PharmPass.getText().toString());
+                    jsonObj.put("role", "PHARMACIST");
+                } catch (JSONException e){
+                    throw new RuntimeException(e);
+                }
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                        (Request.Method.PUT, url, jsonObj, new Response.Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject response) {
+
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // TODO: Handle error
+
+                            }
+                        });
+                RQueueSingleton.getInstance(getApplicationContext()).getRequestQueue().add(jsonObjectRequest);
             }
         });
         Back.setOnClickListener(new View.OnClickListener() {

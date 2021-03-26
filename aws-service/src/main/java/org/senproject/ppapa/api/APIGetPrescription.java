@@ -17,7 +17,7 @@ import org.senproject.ppapa.repository.PrescriptionRepository;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 
-public class APICreatePrescription implements RequestStreamHandler {
+public class APIGetPrescription implements RequestStreamHandler {
 
 	public void handleRequest(InputStream input, OutputStream output, Context context) throws IOException {
 
@@ -29,7 +29,7 @@ public class APICreatePrescription implements RequestStreamHandler {
 		try {
 			JSONObject responseBody = new JSONObject();
 			JSONObject event = (JSONObject) parser.parse(reader);
-			context.getLogger().log("APICreatePrescription invoked " + event);
+			context.getLogger().log("APIGetPrescription invoked " + event);
 
 			if (event.get("body") != null) {
 
