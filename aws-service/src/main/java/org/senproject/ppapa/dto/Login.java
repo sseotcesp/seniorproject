@@ -7,6 +7,7 @@ import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
 import org.senproject.ppapa.model.JsonModel;
+import org.senproject.ppapa.model.ROLE;
 import org.senproject.ppapa.repository.PrescriptionRepository;
 
 // TODO move to dto package
@@ -14,6 +15,7 @@ public class Login extends JsonModel {
 
 	private String user;
 	private String pass;
+	private ROLE role; 
 
 	public String getPass() {
 		return pass;
@@ -43,4 +45,12 @@ public class Login extends JsonModel {
 			return false;
 	}
 	*/
+
+	public ROLE getRole() {
+		return role;
+	}
+
+	public void setRole(ROLE role) {
+		this.role = role;
+	}
 }

@@ -1,8 +1,11 @@
 package com.example.ppapav3.dto;
 
+import com.example.ppapav3.model.ROLE;
+
 public class Login {
     private String user;
     private String pass;
+    private ROLE role;
 
     public String getPass() {
         return pass;
@@ -19,5 +22,11 @@ public class Login {
     public void setUser(String user) {
         this.user = user;
     }
+    public ROLE getRole() {
+        return role;
+    }
 
+    public void setPass(ROLE role) {
+        this.pass = pass;
+    }
 }

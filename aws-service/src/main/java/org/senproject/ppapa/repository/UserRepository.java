@@ -1,5 +1,6 @@
 package org.senproject.ppapa.repository;
 
+import org.senproject.ppapa.model.ROLE;
 import org.senproject.ppapa.model.User;
 
 import com.amazonaws.regions.Region;
@@ -37,11 +38,11 @@ public class UserRepository {
 		return null;
 	}
 */
-	public boolean check(String u, String p) {
+	public boolean check(String u, String p, ROLE r) {
 	
 		Table table = dynamoDb.getTable(DYNAMODB_TABLE_NAME); 
 		Item dummy = table.getItem("userId", u); 
-		if(dummy != null && dummy.getString("password").equals(p))
+		if(dummy != null && dummy.getString("password").equals(p) && dummy.getString("role").equals(r.toString()))
 			return true; 
 		else 
 			return false;

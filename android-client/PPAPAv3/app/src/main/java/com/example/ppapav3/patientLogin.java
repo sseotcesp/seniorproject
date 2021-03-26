@@ -46,6 +46,7 @@ public class patientLogin extends AppCompatActivity {
                     jsonObj = new JSONObject();
                     jsonObj.put("user", Name.getText().toString());
                     jsonObj.put("pass", Password.getText().toString());
+                    jsonObj.put("role", "PATIENT");
                 } catch (JSONException e){
                     throw new RuntimeException(e);
                 }

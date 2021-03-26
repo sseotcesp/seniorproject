@@ -33,7 +33,7 @@ public class LoginCheck implements RequestStreamHandler {
 				Login login = Login.newInstance(Login.class, (String) event.get("body"));
 				UserRepository repository = new UserRepository();
 				 
-				if (repository.check(login.getUser(), login.getPass())) {
+				if (repository.check(login.getUser(), login.getPass(), login.getRole())) {
 					response.setMessage("Success");
 					response.setError("No Error");
 					response.setStatus(1);
