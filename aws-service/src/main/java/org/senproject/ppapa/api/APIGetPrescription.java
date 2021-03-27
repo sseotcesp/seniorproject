@@ -34,7 +34,7 @@ public class APIGetPrescription implements RequestStreamHandler {
 
 			if (event.get("body") != null) {
 
-				PrescriptionKey prescriptionKey = PrescriptionKey.newInstance(PrescriptionKey.class,
+				PrescriptionKey prescriptionKey = (PrescriptionKey) PrescriptionKey.newInstance(PrescriptionKey.class,
 						(String) event.get("body"));
 				PrescriptionRepository prescriptionRepository = new PrescriptionRepository();
 				responseBody.put("information", prescriptionRepository.getPrescription(prescriptionKey));

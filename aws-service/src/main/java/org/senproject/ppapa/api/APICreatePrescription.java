@@ -33,7 +33,7 @@ public class APICreatePrescription implements RequestStreamHandler {
 
 			if (event.get("body") != null) {
 
-				Prescription prescription = Prescription.newInstance(Prescription.class, (String) event.get("body"));
+				Prescription prescription = (Prescription) Prescription.newInstance(Prescription.class, (String) event.get("body"));
 				PrescriptionRepository repository = new PrescriptionRepository();
 				if (repository.userExists(prescription)) {
 					repository.save(prescription);

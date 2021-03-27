@@ -6,7 +6,7 @@ public class TestPrescriptionJson {
 
 	public static void main(String[] a) {
 		String json = "{\"key\": \"asdfasd\", \"puser\":\"gar\",\"information\":\"asdfasdf\" }";
-		Prescription p = Prescription.newInstance(Prescription.class, json);
+		Prescription p = (Prescription) Prescription.newInstance(Prescription.class, json);
 		System.out.println(p);
 	}
 }

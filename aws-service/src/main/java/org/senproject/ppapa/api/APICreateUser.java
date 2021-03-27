@@ -28,7 +28,7 @@ public class APICreateUser implements RequestStreamHandler {
 	        JSONObject event = (JSONObject) parser.parse(reader);
 	        context.getLogger().log("APICreateUser invoked " + event);
 	        if (event.get("body") != null) {
-	        	User user = User.newInstance(User.class, (String) event.get("body"));
+	        	User user = (User) User.newInstance(User.class, (String) event.get("body"));
 	        	UserRepository repository = new UserRepository();	        	
 	        	repository.save(user);
 	       // 	responseBody.put("message", "New User created " + user.getUserId());

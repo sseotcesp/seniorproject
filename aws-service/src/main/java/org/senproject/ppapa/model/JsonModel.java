@@ -10,9 +10,9 @@ public abstract class JsonModel<T> {
         return gson.toJson(this);
     }
     
-    public static <T extends JsonModel<?>> T newInstance(Class<T> klass, String json) {
+    public static Object newInstance(Class klass, String json) {
         Gson gson = new Gson();
-        return (T) gson.fromJson(json, klass);
+        return  gson.fromJson(json, klass);
     }
 
 }

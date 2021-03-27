@@ -30,7 +30,7 @@ public class LoginCheck implements RequestStreamHandler {
 			JSONObject event = (JSONObject) parser.parse(reader);
 			context.getLogger().log("LoginCheck invoked " + event);
 			if (event.get("body") != null) {
-				Login login = Login.newInstance(Login.class, (String) event.get("body"));
+				Login login = (Login) Login.newInstance(Login.class, (String) event.get("body"));
 				UserRepository repository = new UserRepository();
 				 
 				if (repository.check(login.getUser(), login.getPass(), login.getRole())) {
