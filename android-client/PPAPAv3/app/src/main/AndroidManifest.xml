@@ -25,6 +25,7 @@
         <activity android:name=".doctorEdit" />
         <activity android:name=".doctorReady" />
         <activity android:name=".doctorMainPage" />
+
         <activity android:name=".pharmLogin" />
         <activity android:name=".patientLogin" />
         <activity android:name=".doctorLogin" />
@@ -35,6 +36,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>
