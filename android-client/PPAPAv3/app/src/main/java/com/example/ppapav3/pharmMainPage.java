@@ -1,6 +1,8 @@
 package com.example.ppapav3;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
@@ -24,6 +26,7 @@ public class pharmMainPage extends AppCompatActivity {
 
     private Button LogOut;
     private TextView Pharmer;
+    private String info;
     private static String url = "https://2ixsb9kljc.execute-api.us-east-1.amazonaws.com/GetPrescription/APIGetPrescription";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +51,9 @@ public class pharmMainPage extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         PharmacistInfo pharmacistInfo = PharmacistInfo.newInstance(PharmacistInfo.class,  response.toString());
-                    
-                        Pharmer.setText(pharmacistInfo.getInformation());
+                        info = pharmacistInfo.getInformation();
+                        System.out.println(pharmacistInfo.getInformation());
+                        System.out.println(info);
                     }
                 }, new Response.ErrorListener() {
 
@@ -59,7 +63,10 @@ public class pharmMainPage extends AppCompatActivity {
 
                     }
                 });
+        Pharmer.setText(info);
         RQueueSingleton.getInstance(getApplicationContext()).getRequestQueue().add(jsonObjectRequest);
+
+
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -52,6 +52,8 @@ public class addPrescr extends AppCompatActivity {
 
                             @Override
                             public void onResponse(JSONObject response) {
+                                Intent intent = new Intent(addPrescr.this, createGoodPresc.class);
+                                startActivity(intent);
                               //  AppResponse response1 = AppResponse.newInstance(AppResponse.class,  response.toString());
                             }
                         }, new Response.ErrorListener() {
