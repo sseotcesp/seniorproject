@@ -25,7 +25,7 @@ public class patientLogin extends AppCompatActivity {
     private Button Login;
     private int counter = 5;
     private static String url ="https://cs3zhrwmnc.execute-api.us-east-1.amazonaws.com/APILoginCheck";
-    String pUser = Name.getText().toString();
+    
 
 
     @Override
