@@ -53,7 +53,7 @@ public class APICreatePrescription implements RequestStreamHandler {
 
 			responseJson.put("statusCode", 200);
 			responseJson.put("headers", headerJson);
-			responseJson.put("body", responseBody.toString());
+			responseJson.put("body", response.toString());
 
 		} catch (ParseException pex) {
 			responseJson.put("statusCode", 400);

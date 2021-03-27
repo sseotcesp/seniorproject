@@ -48,7 +48,7 @@ public class addPrescr extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                        (Request.Method.PUT, url, jsonObj, new Response.Listener<JSONObject>() {
+                        (Request.Method.POST, url, jsonObj, new Response.Listener<JSONObject>() {
 
                             @Override
                             public void onResponse(JSONObject response) {
