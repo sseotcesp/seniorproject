@@ -16,6 +16,7 @@ public class doctorMainPage extends AppCompatActivity {
     private Button EditPatient;
     private Button EditPharm;
     private Button AddPresc;
+    String Signal = getIntent().getStringExtra("patientReady");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +29,20 @@ public class doctorMainPage extends AppCompatActivity {
         EditPharm = (Button)findViewById(R.id.btEditPharm);
         AddPresc = (Button)findViewById(R.id.btAddPresc);
 
-        Ready.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(doctorMainPage.this, doctorReady.class);
-                startActivity(intent);
-            }
-        });
+        Ready.setEnabled(false);
+
+        if (Signal == "1")
+        {
+            Ready.setEnabled(true);
+            Ready.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(doctorMainPage.this, doctorReady.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

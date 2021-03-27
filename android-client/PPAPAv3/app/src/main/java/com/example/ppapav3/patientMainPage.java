@@ -27,7 +27,9 @@ public class patientMainPage extends AppCompatActivity {
         Ready.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String signal = "1";
                 Intent intent = new Intent(patientMainPage.this, patientReady.class);
+                intent.putExtra("patientReady", signal);
                 startActivity(intent);
             }
         });
