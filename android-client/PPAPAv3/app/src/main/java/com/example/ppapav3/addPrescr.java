@@ -58,8 +58,10 @@ public class addPrescr extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                                 else{
-
+                                    Intent intent = new Intent(addPrescr.this, createBadPresc.class);
+                                    startActivity(intent);
                                 }
+                            }
                         }, new Response.ErrorListener() {
 
                             @Override
