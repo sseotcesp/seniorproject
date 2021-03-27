@@ -59,7 +59,6 @@ public class patientLogin extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 String pUser = Name.getText().toString();
                                 AppResponse response1 = AppResponse.newInstance(AppResponse.class,  response.toString());
-                                System.out.println("response = " + response.toString());
                                 if(response1.getStatus() == 1) {
                                     Intent intent = new Intent(patientLogin.this, patientMainPage.class);
                                     intent.putExtra("Username", pUser);

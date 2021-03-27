@@ -52,18 +52,16 @@ public class pharmMainPage extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         PharmacistInfo pharmacistInfo = PharmacistInfo.newInstance(PharmacistInfo.class,  response.toString());
                         info = pharmacistInfo.getInformation();
-                        System.out.println(pharmacistInfo.getInformation());
-                        System.out.println(info);
+                        Pharmer.setText(info);
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
-
                     }
                 });
-        Pharmer.setText(info);
+
         RQueueSingleton.getInstance(getApplicationContext()).getRequestQueue().add(jsonObjectRequest);
 
 

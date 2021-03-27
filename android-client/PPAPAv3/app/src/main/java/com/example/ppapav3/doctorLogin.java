@@ -55,7 +55,6 @@ public class doctorLogin extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
                                 AppResponse response1 = AppResponse.newInstance(AppResponse.class,  response.toString());
-                                System.out.println("response = " + response.toString());
                                 if(response1.getStatus() == 1) {
                                     String dUser = Name.getText().toString();
                                     Intent intent = new Intent(doctorLogin.this, doctorMainPage.class);
@@ -80,30 +79,7 @@ public class doctorLogin extends AppCompatActivity {
 
                             }
                         });
-//                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-//                        new Response.Listener<String>() {
-//                            @Override
-//                            public void onResponse(String response) {
-////                                JSONParser parser = new JSONParser();
-////                                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-////                                JSONObject responseJson = new JSONObject();
-//                                AppResponse response1 = AppResponse.newInstance(AppResponse.class,  response);
-//                                System.out.println("response = " + response);
-//
-//
-//                               // Intent intent = new Intent(pharmLogin.this, pharmMainPage.class);
-//                             //   startActivity(intent);
-//
-//                                // Display the first 500 characters of the response string.
-//                                //textView.setText("Response is: "+ response.substring(0,500));
-//                            }
-//                        }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        System.out.println("ffdfdfdfdf error" );
-//                        error.printStackTrace();
-//                    }
-//                });
+
                 RQueueSingleton.getInstance(getApplicationContext()).getRequestQueue().add(jsonObjectRequest);
 
             }
@@ -111,24 +87,5 @@ public class doctorLogin extends AppCompatActivity {
 
         });
     }
-//    private void validate()
-//    {
-//        if (status)
-//        {
-//            Intent intent = new Intent(pharmLogin.this, pharmMainPage.class);
-//            startActivity(intent);
-//        }
-//        else
-//        {
-//            counter--;
-//            Info.setText("# of Attempts Remaining: " + String.valueOf(counter));
-//
-//            if (counter == 0)
-//            {
-//                Login.setEnabled(false);
-//            }
-//        }
-//    }
-
 
 }
